@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using WebDictionary.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<WebDictionaryContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WebDictionaryContext") ?? throw new InvalidOperationException("Connection string 'WebDictionaryContext' not found.")));
 
 var app = builder.Build();
 
