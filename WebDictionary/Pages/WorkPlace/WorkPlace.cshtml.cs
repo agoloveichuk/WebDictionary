@@ -1,19 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Domain.Entities;
+using WebDictionary.Data;
 
 namespace WebDictionary.Pages.WorkPlace
 {
-    public class WorkPlaceModel : PageModel
+    public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> logger;
+        private readonly WebDictionary.Data.WebDictionaryContext _context;
 
-        public WorkPlaceModel(ILogger<IndexModel> logger)
+        public IndexModel(WebDictionary.Data.WebDictionaryContext context)
         {
-            this.logger = logger;
+            _context = context;
         }
-        public void OnGet()
+
+        public IList<Dictionary> Dictionary { get;set; } = default!;
+
+        public async Task OnGetAsync()
         {
-            logger.LogInformation("GET Pages.PrivacyModel called.");
+            if (_context.Dictionary != null)
+            {
+                Dictionary = await _context.Dictionary.ToListAsync();
+            }
         }
     }
 }

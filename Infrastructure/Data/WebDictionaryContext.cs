@@ -38,15 +38,15 @@ namespace WebDictionary.Data
                 );
 
             modelBuilder.Entity<Word>().HasData(
-                new Word { WordId = 1, DictionaryId = 1, EnWord = "Canada Dry", UaWord = "Iced Tea", Definition = "Iced Tea" },
-                new Word { WordId = 2, DictionaryId = 1, EnWord = "Canada Dry", UaWord = "Iced Tea", Definition = "Iced Tea" },
-                new Word { WordId = 3, DictionaryId = 1, EnWord = "Bread", UaWord = "Iced Tea", Definition = "Iced Tea" },
-                new Word { WordId = 4, DictionaryId = 1, EnWord = "Chease", UaWord = "Iced Tea", Definition = "Iced Tea" }
+                new Word { WordId = 1, DictionaryId = 1, EnWord = "Cat", UaWord = "Кіт", Definition = "Animal Description" },
+                new Word { WordId = 2, DictionaryId = 1, EnWord = "Dog", UaWord = "Собака", Definition = "Animal Description" },
+                new Word { WordId = 3, DictionaryId = 1, EnWord = "Pig", UaWord = "Свиня", Definition = "Animal Description" },
+                new Word { WordId = 4, DictionaryId = 1, EnWord = "Mouse", UaWord = "Миша", Definition = "Animal Description" }
                 );
 
             modelBuilder.Entity<Phrase>().HasData(
-                new Phrase { PhraseId = 1, DictionaryId = 1, EnPhrase = "Canada Dry", UaPhrase = "Iced Tea", Definition = "Iced Tea" },
-                new Phrase { PhraseId = 2, DictionaryId = 1, EnPhrase = "Canada Dry", UaPhrase = "Iced Tea", Definition = "Iced Tea" }
+                new Phrase { PhraseId = 1, DictionaryId = 1, EnPhrase = "Mantis Shrimp", UaPhrase = "Креветка богомол", Definition = "Animal Phrase Description" },
+                new Phrase { PhraseId = 2, DictionaryId = 1, EnPhrase = "Wolf Fish", UaPhrase = "Риба Вовк", Definition = "Animal Phrase Description" }
                 );
         }
     }
