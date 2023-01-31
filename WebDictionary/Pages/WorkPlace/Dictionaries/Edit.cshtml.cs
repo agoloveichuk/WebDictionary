@@ -37,10 +37,10 @@ namespace WebDictionary.Pages.WorkPlace
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
 
             unitOfWork.DictionaryRepository.Update(Dictionary);
 
@@ -60,7 +60,7 @@ namespace WebDictionary.Pages.WorkPlace
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/WorkPlace/WorkPlace");
         }
 
         private bool DictionaryExists(int id)
