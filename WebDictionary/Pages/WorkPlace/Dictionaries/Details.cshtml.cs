@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
 using WebDictionary.Data;
 
 namespace WebDictionary.Pages.WorkPlace
@@ -15,7 +11,7 @@ namespace WebDictionary.Pages.WorkPlace
         private readonly WebDictionaryContext context;
 
         public DetailsModel(WebDictionaryContext context) => this.context = context;
-        public Dictionary Dictionary { get; set; } = default!; 
+        public Dictionary Dictionary { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +25,7 @@ namespace WebDictionary.Pages.WorkPlace
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Dictionary = dictionary;
             }
