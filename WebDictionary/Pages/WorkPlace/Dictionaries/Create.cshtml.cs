@@ -24,16 +24,16 @@ namespace WebDictionary.Pages.WorkPlace
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || context.Dictionary == null || Dictionary == null)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid || context.Dictionary == null || Dictionary == null)
+            //{
+            //    return Page();
+            //}
 
             unitOfWork.DictionaryRepository.Create(Dictionary);
             //context.Dictionary.Add(Dictionary);
             await unitOfWork.SaveAsync();
 
-            return RedirectToPage("WorkPlace/WorkPlace");
+            return RedirectToPage("/WorkPlace/WorkPlace");
         }
     }
 }
