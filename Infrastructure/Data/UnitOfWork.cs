@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebDictionary.Data;
 
-namespace Infrastructure.Data.Repositories
+namespace Infrastructure.Data
 {
     public class UnitOfWork : IDisposable
     {
@@ -20,7 +21,7 @@ namespace Infrastructure.Data.Repositories
             var contextOptions = new DbContextOptionsBuilder<WebDictionaryContext>()
                 .UseSqlServer("Data Source=(local);Initial Catalog=WebDictionary; Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
                 .Options;
-            this.context = new WebDictionaryContext(contextOptions);
+            context = new WebDictionaryContext(contextOptions);
         }
 
 
@@ -29,9 +30,9 @@ namespace Infrastructure.Data.Repositories
             get
             {
 
-                if (this.dictionaryRepository == null)
+                if (dictionaryRepository == null)
                 {
-                    this.dictionaryRepository = new GenericRepository<Dictionary>(context);
+                    dictionaryRepository = new GenericRepository<Dictionary>(context);
                 }
                 return dictionaryRepository;
             }
@@ -46,14 +47,14 @@ namespace Infrastructure.Data.Repositories
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     context.Dispose();
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose()

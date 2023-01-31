@@ -1,5 +1,5 @@
 ﻿using Domain.Entities;
-using Infrastructure.Data.Repositories;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using WebDictionary.Data;
