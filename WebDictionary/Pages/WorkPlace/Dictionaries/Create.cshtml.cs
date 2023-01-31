@@ -9,7 +9,7 @@ namespace WebDictionary.Pages.WorkPlace
     public class CreateModel : PageModel
     {
         private readonly WebDictionaryContext context;
-        private UnitOfWork unitOfWork = new();
+        private readonly UnitOfWork unitOfWork = new();
         public CreateModel(WebDictionaryContext context) => this.context = context;
 
         public IActionResult OnGet()
