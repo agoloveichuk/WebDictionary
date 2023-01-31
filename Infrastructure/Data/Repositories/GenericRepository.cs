@@ -19,7 +19,6 @@ namespace Infrastructure.Data.Repositories
         public virtual void Create(TEntity entity)
         {
             dbSet.Add(entity);
-            context.SaveChanges();
         }
 
         public virtual void Delete(object id)
