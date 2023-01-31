@@ -16,7 +16,7 @@ namespace Infrastructure.Data.Repositories
         public GenericRepository(WebDictionaryContext context)
             => (this.context, dbSet) = (context, context.Set<TEntity>());
 
-        public virtual void Add(TEntity entity)
+        public virtual void Create(TEntity entity)
         {
             dbSet.Add(entity);
             context.SaveChanges();

@@ -9,10 +9,10 @@ namespace WebDictionary.Pages.WorkPlace
     public class IndexModel : PageModel
     {
         private readonly WebDictionaryContext context;
-        private readonly IGenericRepository<Dictionary> dictionaryRepository;
+        //private readonly IGenericRepository<Dictionary> dictionaryRepository;
+        private UnitOfWork unitOfWork = new();
 
-        public IndexModel(WebDictionaryContext context, IGenericRepository<Dictionary> dictionaryRepository) 
-            => (this.context, this.dictionaryRepository) = (context, dictionaryRepository);
+        public IndexModel(WebDictionaryContext context) => (this.context) = (context);
 
         public IList<Dictionary> Dictionary { get; set; } = default!;
 
@@ -20,7 +20,7 @@ namespace WebDictionary.Pages.WorkPlace
         {
             if (context.Dictionary != null)
             {
-                Dictionary = (IList<Dictionary>) await dictionaryRepository.GetAllAsync();
+                Dictionary = (IList<Dictionary>) await unitOfWork.DictionaryRepository.GetAllAsync();
             }
         }
     }
