@@ -12,24 +12,21 @@ namespace WebDictionary.Pages.WorkPlace
 {
     public class DeleteModel : PageModel
     {
-        private readonly WebDictionary.Data.WebDictionaryContext _context;
+        private readonly WebDictionaryContext context;
 
-        public DeleteModel(WebDictionary.Data.WebDictionaryContext context)
-        {
-            _context = context;
-        }
+        public DeleteModel(WebDictionaryContext context) => this.context = context;
 
         [BindProperty]
       public Dictionary Dictionary { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Dictionary == null)
+            if (id == null || context.Dictionary == null)
             {
                 return NotFound();
             }
 
-            var dictionary = await _context.Dictionary.FirstOrDefaultAsync(m => m.DictionaryId == id);
+            var dictionary = await context.Dictionary.FirstOrDefaultAsync(m => m.DictionaryId == id);
 
             if (dictionary == null)
             {
@@ -44,17 +41,17 @@ namespace WebDictionary.Pages.WorkPlace
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Dictionary == null)
+            if (id == null || context.Dictionary == null)
             {
                 return NotFound();
             }
-            var dictionary = await _context.Dictionary.FindAsync(id);
+            var dictionary = await context.Dictionary.FindAsync(id);
 
             if (dictionary != null)
             {
                 Dictionary = dictionary;
-                _context.Dictionary.Remove(Dictionary);
-                await _context.SaveChangesAsync();
+                context.Dictionary.Remove(Dictionary);
+                await context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

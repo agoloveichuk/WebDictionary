@@ -13,24 +13,21 @@ namespace WebDictionary.Pages.WorkPlace
 {
     public class EditModel : PageModel
     {
-        private readonly WebDictionary.Data.WebDictionaryContext _context;
+        private readonly WebDictionaryContext context;
 
-        public EditModel(WebDictionary.Data.WebDictionaryContext context)
-        {
-            _context = context;
-        }
+        public EditModel(WebDictionaryContext context) => this.context = context;
 
         [BindProperty]
         public Dictionary Dictionary { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Dictionary == null)
+            if (id == null || context.Dictionary == null)
             {
                 return NotFound();
             }
 
-            var dictionary =  await _context.Dictionary.FirstOrDefaultAsync(m => m.DictionaryId == id);
+            var dictionary =  await context.Dictionary.FirstOrDefaultAsync(m => m.DictionaryId == id);
             if (dictionary == null)
             {
                 return NotFound();
@@ -48,11 +45,11 @@ namespace WebDictionary.Pages.WorkPlace
                 return Page();
             }
 
-            _context.Attach(Dictionary).State = EntityState.Modified;
+            context.Attach(Dictionary).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -71,7 +68,7 @@ namespace WebDictionary.Pages.WorkPlace
 
         private bool DictionaryExists(int id)
         {
-          return (_context.Dictionary?.Any(e => e.DictionaryId == id)).GetValueOrDefault();
+          return (context.Dictionary?.Any(e => e.DictionaryId == id)).GetValueOrDefault();
         }
     }
 }

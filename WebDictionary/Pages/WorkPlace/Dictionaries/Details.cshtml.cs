@@ -12,23 +12,19 @@ namespace WebDictionary.Pages.WorkPlace
 {
     public class DetailsModel : PageModel
     {
-        private readonly WebDictionary.Data.WebDictionaryContext _context;
+        private readonly WebDictionaryContext context;
 
-        public DetailsModel(WebDictionary.Data.WebDictionaryContext context)
-        {
-            _context = context;
-        }
-
-      public Dictionary Dictionary { get; set; } = default!; 
+        public DetailsModel(WebDictionaryContext context) => this.context = context;
+        public Dictionary Dictionary { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Dictionary == null)
+            if (id == null || context.Dictionary == null)
             {
                 return NotFound();
             }
 
-            var dictionary = await _context.Dictionary.FirstOrDefaultAsync(m => m.DictionaryId == id);
+            var dictionary = await context.Dictionary.FirstOrDefaultAsync(m => m.DictionaryId == id);
             if (dictionary == null)
             {
                 return NotFound();

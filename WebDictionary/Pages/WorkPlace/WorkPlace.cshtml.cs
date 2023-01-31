@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Entities;
+using Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
 using WebDictionary.Data;
 
 namespace WebDictionary.Pages.WorkPlace
 {
     public class IndexModel : PageModel
     {
-        private readonly WebDictionary.Data.WebDictionaryContext _context;
+        private readonly WebDictionaryContext context;
+        private readonly IGenericRepository<Dictionary> dictionaryRepository;
 
-        public IndexModel(WebDictionary.Data.WebDictionaryContext context)
-        {
-            _context = context;
-        }
+        public IndexModel(WebDictionaryContext context, IGenericRepository<Dictionary> dictionaryRepository) 
+            => (this.context, this.dictionaryRepository) = (context, dictionaryRepository);
 
-        public IList<Dictionary> Dictionary { get;set; } = default!;
+        public IList<Dictionary> Dictionary { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Dictionary != null)
+            if (context.Dictionary != null)
             {
-                Dictionary = await _context.Dictionary.ToListAsync();
+                Dictionary = (IList<Dictionary>) await dictionaryRepository.GetAllAsync();
             }
         }
     }

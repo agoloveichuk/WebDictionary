@@ -12,12 +12,9 @@ namespace WebDictionary.Pages.WorkPlace
 {
     public class CreateModel : PageModel
     {
-        private readonly WebDictionary.Data.WebDictionaryContext _context;
+        private readonly WebDictionaryContext context;
 
-        public CreateModel(WebDictionary.Data.WebDictionaryContext context)
-        {
-            _context = context;
-        }
+        public CreateModel(WebDictionaryContext context) => this.context = context;
 
         public IActionResult OnGet()
         {
@@ -31,13 +28,13 @@ namespace WebDictionary.Pages.WorkPlace
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Dictionary == null || Dictionary == null)
+          if (!ModelState.IsValid || context.Dictionary == null || Dictionary == null)
             {
                 return Page();
             }
 
-            _context.Dictionary.Add(Dictionary);
-            await _context.SaveChangesAsync();
+            context.Dictionary.Add(Dictionary);
+            await context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
