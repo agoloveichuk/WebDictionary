@@ -21,23 +21,11 @@ namespace WebDictionary.Pages.WorkPlace
         public IList<Dictionary> Dictionary { get; set; } = default!;
         public async Task OnGetAsync(int id = 1)
         {
-            //Word = (IList<Word>) await wordRepository.GetAllByDictionaryIdAsync(1);
             if (context.Dictionary != null)
             {
                 Dictionary = (IList<Dictionary>) await unitOfWork.DictionaryRepository.GetAllAsync();
             }
             Word = (IList<Word>)await wordRepository.GetAllByDictionaryIdAsync(id);
-            //if(context.Word != null)
-            //{
-            //    
-            //    //Word = (IList<Word>) await unitOfWork.WordRepository.GetAllAsync();
-            //}
-        }
-
-        public async Task<PageResult> OnGetSellectDictionaryAsync(int id)
-        {
-            Word = (IList<Word>) await wordRepository.GetAllByDictionaryIdAsync(id);
-            return Page();
         }
     }
 }
