@@ -8,7 +8,8 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Dictionaries/Create">Create New</a>
+    <a asp-page="Dictionaries/Create">Create New Dictionary</a>
+    <a asp-page="Words/Create">Create New Word</a>
 </p>
 <div class="row">
     <div class="col-4">
@@ -44,7 +45,49 @@
         </table>
     </div>
     <div class="col-8">
-        gggggg
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Word[0].EnWord)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Word[0].UaWord)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Word[0].Definition)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Word[0].Dictionary)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Word)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EnWord)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UaWord)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Definition)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dictionary.Description)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.WordId">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.WordId">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.WordId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 

@@ -12,13 +12,18 @@ namespace WebDictionary.Pages.WorkPlace
 
         public IndexModel(WebDictionaryContext context) => (this.context) = (context);
 
+        public IList<Word> Word { get; set; } = default!;
         public IList<Dictionary> Dictionary { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
             if (context.Dictionary != null)
             {
-                Dictionary = (IList<Dictionary>)await unitOfWork.DictionaryRepository.GetAllAsync();
+                Dictionary = (IList<Dictionary>) await unitOfWork.DictionaryRepository.GetAllAsync();
+            }
+            if(context.Word != null)
+            {
+                Word = (IList<Word>)await unitOfWork.WordRepository.GetAllAsync();
             }
         }
     }

@@ -1,0 +1,42 @@
+﻿@page
+@model WebDictionary.Pages.WorkPlace.Words.CreateModel
+
+<h4>Word</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Word.DictionaryId" class="control-label"></label>
+                <select asp-for="Word.DictionaryId" class ="form-control" asp-items="ViewBag.DictionaryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Word.EnWord" class="control-label"></label>
+                <input asp-for="Word.EnWord" class="form-control" />
+                <span asp-validation-for="Word.EnWord" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Word.UaWord" class="control-label"></label>
+                <input asp-for="Word.UaWord" class="form-control" />
+                <span asp-validation-for="Word.UaWord" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Word.Definition" class="control-label"></label>
+                <input asp-for="Word.Definition" class="form-control" />
+                <span asp-validation-for="Word.Definition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/WorkPlace/WorkPlace">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

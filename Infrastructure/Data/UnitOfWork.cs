@@ -14,7 +14,7 @@ namespace Infrastructure.Data
     {
         private WebDictionaryContext context;
         private GenericRepository<Dictionary>? dictionaryRepository;
-        //private GenericRepository<Word> courseRepository;
+        private GenericRepository<Word>? wordRepository;
         //private GenericRepository<Phrase> courseRepository;
         public UnitOfWork()
         {
@@ -35,6 +35,19 @@ namespace Infrastructure.Data
                     dictionaryRepository = new GenericRepository<Dictionary>(context);
                 }
                 return dictionaryRepository;
+            }
+        }
+
+        public GenericRepository<Word> WordRepository
+        {
+            get
+            {
+
+                if (wordRepository == null)
+                {
+                    wordRepository = new GenericRepository<Word>(context);
+                }
+                return wordRepository;
             }
         }
 
