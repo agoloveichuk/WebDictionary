@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
 using WebDictionary.Data;
 
 namespace WebDictionary.Pages.WorkPlace.Words
 {
     public class EditModel : PageModel
     {
-        private readonly WebDictionary.Data.WebDictionaryContext context;
+        private readonly WebDictionaryContext context;
+        private readonly UnitOfWork unitOfWork = new();
 
-        public EditModel(WebDictionary.Data.WebDictionaryContext context)
-        {
-            this.context = context;
-        }
+        public EditModel(WebDictionaryContext context) => this.context = context;
 
         [BindProperty]
         public Word Word { get; set; } = default!;
@@ -30,13 +25,13 @@ namespace WebDictionary.Pages.WorkPlace.Words
                 return NotFound();
             }
 
-            var word =  await context.Word.FirstOrDefaultAsync(m => m.WordId == id);
+            var word = await context.Word.FirstOrDefaultAsync(m => m.WordId == id);
             if (word == null)
             {
                 return NotFound();
             }
             Word = word;
-           ViewData["DictionaryId"] = new SelectList(context.Dictionary, "DictionaryId", "Description");
+            ViewData["DictionaryId"] = new SelectList(context.Dictionary, "DictionaryId", "Description");
             return Page();
         }
 
@@ -44,16 +39,16 @@ namespace WebDictionary.Pages.WorkPlace.Words
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
 
-            context.Attach(Word).State = EntityState.Modified;
+            unitOfWork.WordRepository.Update(Word);
 
             try
             {
-                await context.SaveChangesAsync();
+                await unitOfWork.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -67,12 +62,12 @@ namespace WebDictionary.Pages.WorkPlace.Words
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/WorkPlace/WorkPlace");
         }
 
         private bool WordExists(int id)
         {
-          return (context.Word?.Any(e => e.WordId == id)).GetValueOrDefault();
+            return (context.Word?.Any(e => e.WordId == id)).GetValueOrDefault();
         }
     }
 }

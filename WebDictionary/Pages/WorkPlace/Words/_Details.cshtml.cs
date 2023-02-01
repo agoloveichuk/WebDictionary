@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
 using WebDictionary.Data;
 
 namespace WebDictionary.Pages.WorkPlace.Words
 {
     public class DetailsModel : PageModel
     {
-        private readonly WebDictionary.Data.WebDictionaryContext context;
+        private readonly WebDictionaryContext context;
+        private readonly UnitOfWork unitOfWork = new();
 
-        public DetailsModel(WebDictionary.Data.WebDictionaryContext context)
-        {
-            this.context = context;
-        }
+        public DetailsModel(WebDictionaryContext context) => this.context = context;
 
-      public Word Word { get; set; } = default!; 
+        public Word Word { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,7 +28,7 @@ namespace WebDictionary.Pages.WorkPlace.Words
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Word = word;
             }

@@ -9,7 +9,7 @@
 
 <p>
     <a asp-page="Dictionaries/Create">Create New Dictionary</a>
-    <a asp-page="Words/Create">Create New Word</a>
+    <a asp-page="Words/_Create">Create New Word</a>
 </p>
 <div class="row">
     <div class="col-4">
@@ -77,12 +77,12 @@
                             @Html.DisplayFor(modelItem => item.Definition)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Dictionary.Description)
+                            @Html.DisplayFor(modelItem => item.Dictionary.Name)
                         </td>
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@item.WordId">Edit</a> |
-                            <a asp-page="./Details" asp-route-id="@item.WordId">Details</a> |
-                            <a asp-page="./Delete" asp-route-id="@item.WordId">Delete</a>
+                            <a asp-page="Words/_Edit" asp-route-id="@item.WordId">Edit</a> |
+                            <a asp-page="Words/_Details" asp-route-id="@item.WordId">Details</a> |
+                            <a asp-page="Words/_Delete" asp-route-id="@item.WordId">Delete</a>
                         </td>
                     </tr>
                 }

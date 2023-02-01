@@ -27,11 +27,14 @@
             @Html.DisplayNameFor(model => model.Word.Dictionary)
         </dt>
         <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Word.Dictionary.Name)
+        </dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Word.Dictionary.Description)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Word?.WordId">Edit</a> |
+    <a asp-page="./_Edit" asp-route-id="@Model.Word?.WordId">Edit</a> |
     <a asp-page="/WorkPlace/WorkPlace">Back to List</a>
 </div>
