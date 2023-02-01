@@ -8,5 +8,7 @@ namespace Infrastructure.Data.Repositories
 {
     public class WordRepository
     {
+        //TODO 
+        // GET WORDS BY DICTIONARY ID 
     }
 }

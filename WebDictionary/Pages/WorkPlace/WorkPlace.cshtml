@@ -5,14 +5,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Work Place</h1>
 
-<p>
-    <a asp-page="Dictionaries/Create">Create New Dictionary</a>
-    <a asp-page="Words/_Create">Create New Word</a>
-</p>
 <div class="row">
     <div class="col-4">
+        <p>
+            <a asp-page="Dictionaries/Create">Create New Dictionary</a>
+        </p>
         <table class="table">
             <thead>
                 <tr>
@@ -35,6 +34,7 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
+                            <a asp-page="" asp-route-id="@item.DictionaryId">Show</a> |
                             <a asp-page="Dictionaries/Edit" asp-route-id="@item.DictionaryId">Edit</a> |
                             <a asp-page="Dictionaries/Details" asp-route-id="@item.DictionaryId">Details</a> |
                             <a asp-page="Dictionaries/Delete" asp-route-id="@item.DictionaryId">Delete</a>
@@ -45,6 +45,9 @@
         </table>
     </div>
     <div class="col-8">
+        <p>
+            <a asp-page="Words/_Create">Create New Word</a>
+        </p>
         <table class="table">
             <thead>
                 <tr>

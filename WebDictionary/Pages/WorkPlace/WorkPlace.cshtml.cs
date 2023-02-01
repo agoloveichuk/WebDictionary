@@ -12,7 +12,7 @@ namespace WebDictionary.Pages.WorkPlace
 
         public IndexModel(WebDictionaryContext context) => (this.context) = (context);
 
-        public IList<Word> Word { get; set; } = default!;
+        public IList<Word> Words { get; set; } = default!;
         public IList<Dictionary> Dictionary { get; set; } = default!;
 
         public async Task OnGetAsync()
@@ -23,7 +23,7 @@ namespace WebDictionary.Pages.WorkPlace
             }
             if(context.Word != null)
             {
-                Word = (IList<Word>)await unitOfWork.WordRepository.GetAllAsync();
+                Words = (IList<Word>) await unitOfWork.WordRepository.GetAllAsync();
             }
         }
     }
