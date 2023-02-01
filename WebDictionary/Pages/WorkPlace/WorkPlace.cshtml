@@ -34,7 +34,7 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            <a asp-page="" asp-route-id="@item.DictionaryId">Show</a> |
+                            <a asp-page-handler="SellectDictionaryAsync" asp-route-id="@item.DictionaryId">Show</a> |
                             <a asp-page="Dictionaries/Edit" asp-route-id="@item.DictionaryId">Edit</a> |
                             <a asp-page="Dictionaries/Details" asp-route-id="@item.DictionaryId">Details</a> |
                             <a asp-page="Dictionaries/Delete" asp-route-id="@item.DictionaryId">Delete</a>

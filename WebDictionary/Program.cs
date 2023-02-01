@@ -10,6 +10,7 @@ builder.Services.AddDbContext<WebDictionaryContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebDictionaryContext") ?? throw new InvalidOperationException("Connection string 'WebDictionaryContext' not found.")));
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IWordRepository, WordRepository>();
 
 var app = builder.Build();
 
