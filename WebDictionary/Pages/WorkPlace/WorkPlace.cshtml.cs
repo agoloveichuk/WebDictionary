@@ -1,9 +1,7 @@
 ﻿using Domain.Entities;
 using Infrastructure.Data;
 using Infrastructure.Data.Repositories;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebDictionary.Data;
 
 namespace WebDictionary.Pages.WorkPlace
@@ -14,7 +12,7 @@ namespace WebDictionary.Pages.WorkPlace
         private readonly UnitOfWork unitOfWork = new();
         private readonly IWordRepository wordRepository;
 
-        public IndexModel(WebDictionaryContext context, IWordRepository wordRepository) 
+        public IndexModel(WebDictionaryContext context, IWordRepository wordRepository)
             => (this.context, this.wordRepository) = (context, wordRepository);
 
         public IList<Word> Word { get; set; } = default!;
@@ -23,7 +21,7 @@ namespace WebDictionary.Pages.WorkPlace
         {
             if (context.Dictionary != null)
             {
-                Dictionary = (IList<Dictionary>) await unitOfWork.DictionaryRepository.GetAllAsync();
+                Dictionary = (IList<Dictionary>)await unitOfWork.DictionaryRepository.GetAllAsync();
             }
             Word = (IList<Word>)await wordRepository.GetAllByDictionaryIdAsync(id);
         }

@@ -3,12 +3,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebDictionary.Data;
 using Microsoft.AspNetCore.Identity;
+using Infrastructure.Data.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/WorkPlace");
+});
+
 builder.Services.AddDbContext<WebDictionaryContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("WebDictionaryContext") ?? throw new InvalidOperationException("Connection string 'WebDictionaryContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WebDictionaryContext")));
+
+builder.Services.AddDbContext<WebDictionaryAccountContext>(options =>
+{
+    options.UseSqlServer("name=ConnectionStrings:WebDictionaryAccountContextConnection");
+});
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<WebDictionaryAccountContext>();
 
@@ -30,6 +40,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebDictionary.Data;
 
 namespace Infrastructure.Data

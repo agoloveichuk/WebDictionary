@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebDictionary.Data;
+namespace Infrastructure.Data.Identity;
 
 public class WebDictionaryAccountContext : IdentityDbContext<IdentityUser>
 {

@@ -1,10 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using WebDictionary.Data;
 
 namespace Infrastructure.Data.Repositories
@@ -25,8 +19,8 @@ namespace Infrastructure.Data.Repositories
         {
             TEntity? entityToDelete = dbSet.Find(id);
             if (entityToDelete != null)
-            { 
-                dbSet.Remove(entityToDelete); 
+            {
+                dbSet.Remove(entityToDelete);
             }
             context.SaveChanges();
         }

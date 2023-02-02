@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
 
 namespace WebDictionary.Data
 {
     public sealed class WebDictionaryContext : DbContext
     {
-        public WebDictionaryContext (DbContextOptions<WebDictionaryContext> options)
+        public WebDictionaryContext(DbContextOptions<WebDictionaryContext> options)
             : base(options)
         {
         }
