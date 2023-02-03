@@ -13,12 +13,10 @@ builder.Services.AddRazorPages(options =>
 });
 
 builder.Services.AddDbContext<WebDictionaryContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("WebDictionaryContext")));
+    options.UseSqlServer("name=ConnectionStrings:WebDictionaryContextConnection"));
 
 builder.Services.AddDbContext<WebDictionaryAccountContext>(options =>
-{
-    options.UseSqlServer("name=ConnectionStrings:WebDictionaryAccountContextConnection");
-});
+    options.UseSqlServer("name=ConnectionStrings:WebDictionaryAccountContextConnection"));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<WebDictionaryAccountContext>();
 
