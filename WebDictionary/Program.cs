@@ -1,11 +1,12 @@
 using Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using WebDictionary.Data;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
-using Infrastructure.Data.Identity;
-var builder = WebApplication.CreateBuilder(args);
+using Infrastructure.Data.Entities;
 
+var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("WebDictionaryContextConnection");
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
@@ -13,12 +14,13 @@ builder.Services.AddRazorPages(options =>
 });
 
 builder.Services.AddDbContext<WebDictionaryContext>(options =>
-    options.UseSqlServer("name=ConnectionStrings:WebDictionaryContextConnection"));
+    options.UseSqlServer(connectionString));
 
-builder.Services.AddDbContext<WebDictionaryAccountContext>(options =>
-    options.UseSqlServer("name=ConnectionStrings:WebDictionaryAccountContextConnection"));
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<WebDictionaryAccountContext>();
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+        .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<AppUser, IdentityRole>>()
+        .AddEntityFrameworkStores<WebDictionaryContext>()
+        .AddDefaultTokenProviders()
+        .AddDefaultUI();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IWordRepository, WordRepository>();

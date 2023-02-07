@@ -16,16 +16,17 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Dictionary[0].Name)
+                        @Html.DisplayNameFor(model => model.Dictionaries[0].Name)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Dictionary[0].Description)
+                        @Html.DisplayNameFor(model => model.Dictionaries[0].Description)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Dictionary) {
+                @foreach (var item in Model.Dictionaries)
+                {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
@@ -52,22 +53,22 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Word[0].EnWord)
+                        @Html.DisplayNameFor(model => model.Words[0].EnWord)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Word[0].UaWord)
+                        @Html.DisplayNameFor(model => model.Words[0].UaWord)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Word[0].Definition)
+                        @Html.DisplayNameFor(model => model.Words[0].Definition)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Word[0].Dictionary)
+                        @Html.DisplayNameFor(model => model.Words[0].Dictionary)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Word)
+                @foreach (var item in Model.Words)
                 {
                     <tr>
                         <td>

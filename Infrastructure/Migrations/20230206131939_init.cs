@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WebDictionary.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class identity : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -156,6 +156,68 @@ namespace WebDictionary.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Dictionary",
+                columns: table => new
+                {
+                    DictionaryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dictionary", x => x.DictionaryId);
+                    table.ForeignKey(
+                        name: "FK_Dictionary_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Phrase",
+                columns: table => new
+                {
+                    PhraseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DictionaryId = table.Column<int>(type: "int", nullable: true),
+                    EnPhrase = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UaPhrase = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Definition = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Phrase", x => x.PhraseId);
+                    table.ForeignKey(
+                        name: "FK_Phrase_Dictionary_DictionaryId",
+                        column: x => x.DictionaryId,
+                        principalTable: "Dictionary",
+                        principalColumn: "DictionaryId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Word",
+                columns: table => new
+                {
+                    WordId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DictionaryId = table.Column<int>(type: "int", nullable: true),
+                    EnWord = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UaWord = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Definition = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Word", x => x.WordId);
+                    table.ForeignKey(
+                        name: "FK_Word_Dictionary_DictionaryId",
+                        column: x => x.DictionaryId,
+                        principalTable: "Dictionary",
+                        principalColumn: "DictionaryId");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +256,21 @@ namespace WebDictionary.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dictionary_AppUserId",
+                table: "Dictionary",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Phrase_DictionaryId",
+                table: "Phrase",
+                column: "DictionaryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Word_DictionaryId",
+                table: "Word",
+                column: "DictionaryId");
         }
 
         /// <inheritdoc />
@@ -215,7 +292,16 @@ namespace WebDictionary.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Phrase");
+
+            migrationBuilder.DropTable(
+                name: "Word");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Dictionary");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

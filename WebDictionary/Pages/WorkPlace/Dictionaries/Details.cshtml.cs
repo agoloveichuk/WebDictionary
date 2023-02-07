@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using WebDictionary.Data;
+using Infrastructure.Data;
 
 namespace WebDictionary.Pages.WorkPlace
 {

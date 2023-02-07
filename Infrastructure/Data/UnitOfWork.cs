@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
-using WebDictionary.Data;
+using Infrastructure.Data;
 
 namespace Infrastructure.Data
 {

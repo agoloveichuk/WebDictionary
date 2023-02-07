@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using WebDictionary.Data;
+using Infrastructure.Data;
 
 namespace Infrastructure.Data.Repositories
 {

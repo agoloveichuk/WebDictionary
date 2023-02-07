@@ -1,5 +1,5 @@
 ﻿using Domain.Entities;
-using WebDictionary.Data;
+using Infrastructure.Data;
 
 namespace Infrastructure.Data.Repositories
 {

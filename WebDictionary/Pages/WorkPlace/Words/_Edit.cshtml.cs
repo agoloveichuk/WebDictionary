@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using WebDictionary.Data;
+using Infrastructure.Data;
 
 namespace WebDictionary.Pages.WorkPlace.Words
 {

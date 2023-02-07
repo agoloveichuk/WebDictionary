@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebDictionary.Data;
+using Infrastructure.Data;
+using Infrastructure.Data.Entities;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -13,6 +14,7 @@ namespace Infrastructure.Data.Repositories
         public virtual void Create(TEntity entity)
         {
             dbSet.Add(entity);
+            //DbSet<AppUser>.Dictionaries.Add(entity);
         }
 
         public virtual void Delete(object id)

@@ -1,8 +1,12 @@
 ﻿using Domain.Entities;
 using Infrastructure.Data;
+using Infrastructure.Data.Entities;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebDictionary.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebDictionary.Pages.WorkPlace
 {
@@ -10,16 +14,25 @@ namespace WebDictionary.Pages.WorkPlace
     {
         private readonly WebDictionaryContext context;
         private readonly UnitOfWork unitOfWork = new();
-        public CreateModel(WebDictionaryContext context) => this.context = context;
+
+        //private readonly SignInManager<AppUser> signInManager;
+        //private readonly UserManager<AppUser> userManager;
+        public CreateModel(WebDictionaryContext context)
+        {
+            this.context = context;
+        }
 
         public IActionResult OnGet()
         {
+            ViewData["AppUserId"] = new SelectList(context.AppUser, "Id", "Id");
             return Page();
         }
 
         [BindProperty]
         public Dictionary Dictionary { get; set; } = default!;
 
+        //[CascadingParameter]
+        //private Task<AuthenticationState> authenticationStateTask { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -28,7 +41,9 @@ namespace WebDictionary.Pages.WorkPlace
             //{
             //    return Page();
             //}
-
+            //var authState = await authenticationStateTask;
+            //var user = authState.User;
+            //Dictionary.AppUserId = userManager.GetUserId(user);
             unitOfWork.DictionaryRepository.Create(Dictionary);
             //context.Dictionary.Add(Dictionary);
             await unitOfWork.SaveAsync();
